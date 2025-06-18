@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luana Martinez | Extensão de Cílios</title>
+    <style>
+        /* Estilos Gerais para o Corpo da Página */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fff0f5; /* Um rosa bem claro para o fundo da página */
+            color: #333; /* Cor de texto padrão */
+            line-height: 1.6; /* Melhorar legibilidade geral */
+        }
+
+        /* --- CABEÇALHO (HEADER) --- */
+        header {
+            /* NOVO: Imagem de fundo do cabeçalho */
+            background-image: url(logo.jpg); /* Usando a imagem com o logo e nome */
+            background-size: cover; /* Garante que a imagem cubra todo o cabeçalho */
+            background-position: center; /* Centraliza a imagem */
+            background-repeat: no-repeat; /* Evita a repetição da imagem */
+            
+            color: white; /* Cor do texto dentro do cabeçalho, que será branco */
+            padding: 1.5rem 1rem; /* Espaçamento interno */
+            text-align: center; /* Alinhamento do texto */
+            display: flex; /* ATIVA FLEXBOX para organizar os itens */
+            flex-direction: column; /* Organiza os itens (navegação) em coluna */
+            justify-content: flex-end; /* IMPORTANTE: Empurra o conteúdo (a navegação) para o FINAL do cabeçalho */
+            align-items: center; /* Centraliza os itens horizontalmente */
+            min-height: 350px; /* Aumentei a altura mínima para a imagem ficar mais visível e ter espaço para a navegação embaixo */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Sombra sutil no cabeçalho */
+            position: relative; /* FUNDAMENTAL para a sobreposição e para o z-index */
+            overflow: hidden; /* Garante que nada saia do header */
+        }
+
+        /* Sobreposição escura para o fundo, para o texto por cima ficar legível */
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.2); /* Fundo semi-transparente um pouco mais claro para a imagem aparecer mais */
+            z-index: 0; /* Garante que fique atrás do conteúdo do cabeçalho */
+        }
+
+        /* Removendo os estilos de h1 e p do header, pois eles não existirão mais */
+        header h1, header p {
+            display: none; /* Esconde o título e o parágrafo no cabeçalho */
+        }
+
+        /* Estilos para os Links de Navegação (Nav) */
+        nav {
+            margin-top: auto; /* NOVO: 'margin-top: auto' empurra a nav para o final do contêiner flex */
+            position: relative; /* Ajuste para que a nav fique por cima da sobreposição */
+            z-index: 1; /* Garante que os links de navegação fiquem acima da sobreposição */
+            display: flex; 
+            justify-content: center; 
+            padding: 0 1rem; 
+            box-sizing: border-box; 
+            flex-wrap: wrap; 
+        }
+
+        nav a {
+            margin: 0 10px; 
+            color: #ff69b4; /* Cor rosa para os links */
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1em; 
+            padding: 8px 15px; 
+            border-radius: 25px; 
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            border: 2px solid #ff69b4; /* Borda rosa para os links */
+            background-color: rgba(255, 105, 180, 0.15); /* Fundo semi-transparente rosa para os botões */
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05); 
+            white-space: nowrap; 
+            margin-bottom: 10px; 
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 105, 180, 0.3); /* Fundo semi-transparente mais forte no hover */
+            transform: translateY(-2px); 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+        }
+
+        /* --- SEÇÕES GERAIS --- */
+        section {
+            padding: 2.5rem 1.5rem; 
+            max-width: 900px;
+            margin: 30px auto; 
+            background-color: #ffffff; 
+            border-radius: 12px; 
+            box-shadow: 0 6px 25px rgba(0,0,0,0.1); 
+        }
+
+        section:first-of-type {
+            margin-top: 30px; 
+        }
+
+        h2 {
+            color: #ff69b4; 
+            text-align: center; 
+            margin-bottom: 30px; 
+            font-size: 2.2em; 
+            border-bottom: 2px solid #fee2f7; 
+            padding-bottom: 12px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05); 
+        }
+
+        /* ======================/================================================ */
+        /* ESTILOS DA SEÇÃO SOBRE (COM IMAGEM À DIREITA NO DESKTOP) */
+        /* ====================================================================== */
+        #sobre {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        #sobre img {
+            max-width: 400px; 
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15); 
+            flex-shrink: 0;
+            object-fit: cover;
+            order: 2; 
+        }
+
+        #sobre div {
+            flex: 1;
+            min-width: 300px; 
+            order: 1; 
+        }
+
+        #sobre h2 {
+            text-align: left; 
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: none; 
+            padding-bottom: 0;
+        }
+
+        #sobre h3 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: #ff69b4;
+            font-size: 1.4em; 
+            text-align: left;
+        }
+
+        #sobre p {
+            line-height: 1.7; 
+            font-size: 1.05em;
+        }
+
+        .btn-servicos-sobre {
+            background-color: #ff69b4;
+            margin-top: 30px; 
+            display: inline-block;
+            padding: 15px 35px; 
+            font-size: 1.1em; 
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px; 
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
+        }
+
+        .btn-servicos-sobre:hover {
+            background-color: #fb2891;
+            transform: translateY(-4px); 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25); 
+        }
+
+        /* ====================================================================== */
+        /* ESTILOS ESPECÍFICOS PARA O PORTFÓLIO (IMAGEM + CAIXA DE TEXTO) */
+        /* ====================================================================== */
+
+        .portfolio-item-row {
+            display: flex;
+            align-items: center;
+            gap: 30px; 
+            margin-bottom: 40px; 
+            flex-wrap: wrap;
+            background-color: #ffffff;
+            padding: 25px; 
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1); 
+            transition: transform 0.2s ease, box-shadow 0.2s ease; 
+        }
+        .portfolio-item-row:last-of-type {
+            margin-bottom: 0; 
+        }
+
+        .portfolio-item-row:hover {
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.18); 
+        }
+
+        .portfolio-item-row img {
+            width: 100%;
+            max-width: 200px; 
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.12); 
+        }
+
+        .portfolio-text-content {
+            flex: 1;
+            line-height: 1.7; 
+            font-size: 1.05em;
+        }
+
+        .portfolio-text-content h3 {
+            margin-top: 0;
+            margin-bottom: 15px; 
+            color: #ff69b4;
+            font-size: 1.6em; 
+        }
+
+        /* ====================================================================== */
+        /* NOVOS ESTILOS PARA CAIXAS NA SEÇÃO 'SERVIÇOS' */
+        /* ====================================================================== */
+
+        #servicos ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px auto;
+            max-width: 900px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px; 
+            justify-content: center;
+        }
+
+        #servicos ul li {
+            background-color: #ffffff;
+            padding: 20px 25px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08); 
+            flex-basis: calc(33.333% - 25px); 
+            max-width: calc(33.333% - 25px);
+            min-width: 280px; 
+            box-sizing: border-box;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease; 
+        }
+        #servicos ul li:hover {
+            transform: translateY(-5px); 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15); 
+        }
+
+        #servicos ul li strong {
+            color: #ff69b4;
+            font-size: 1.3em; 
+            display: block;
+            margin-bottom: 8px; 
+        }
+
+        #servicos ul li p {
+            margin-bottom: 10px; 
+            line-height: 1.5;
+            font-size: 0.98em;
+        }
+
+        #servicos ul li .preco {
+            font-weight: bold;
+            color: #ff0080; 
+            display: block;
+            margin-top: 15px; 
+            font-size: 1.25em; 
+        }
+
+        #servicos ul li .manutencao {
+            font-style: italic;
+            color: #888; 
+            font-size: 0.9em; 
+            display: block;
+            margin-top: 5px;
+        }
+
+        #servicos .observacao {
+            font-size: 0.98em; 
+            color: #555;
+            text-align: center;
+            margin-bottom: 15px; 
+        }
+
+        /* Estilos para o Rodapé (Footer) */
+        footer {
+            background: linear-gradient(to top,#fe5cad,#fe419f,#fb2891,#ff0080);
+            color: white;
+            text-align: center;
+            padding: 1.8rem; 
+            margin-top: 40px; 
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.1); 
+        }
+
+        /* Estilos para a Imagem de Assinatura no Rodapé */
+        footer img {
+            max-width: 140px; 
+            height: auto;
+            display: block;
+            margin: 18px auto 0 auto; 
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4)); 
+        }
+
+        /* Estilos para os Botões de Contato (WhatsApp e Instagram) */
+        #contato {
+            text-align: center; 
+        }
+
+        #contato p {
+            margin-bottom: 25px; 
+        }
+
+        .btn-contato {
+            display: inline-block;
+            margin: 0 15px 15px 0; 
+            padding: 14px 28px; 
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 30px; 
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
+            font-size: 1.15em; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2); 
+        }
+
+        .btn-whats {
+            background-color: #25D366; 
+        }
+        .btn-whats:hover {
+            background-color: #1DA851; 
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn-insta {
+            background-color: #C13584; 
+        }
+        .btn-insta:hover {
+            background-color: #A62A70; 
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+
+        /* ====================================================================== */
+        /* MEDIA QUERY PARA RESPONSIVIDADE (Telas menores como celulares) */
+        /* ====================================================================== */
+
+        @media (max-width: 768px) { 
+            header {
+                min-height: 180px; /* Ajuste para que a imagem apareça bem no mobile também */
+                padding: 0.8rem;
+            }
+            /* Esconde o título e o parágrafo no cabeçalho também em telas menores */
+            header h1, header p {
+                display: none; 
+            }
+            nav {
+                padding: 0 0.5rem; 
+            }
+            nav a {
+                margin: 0 5px; 
+                padding: 6px 10px;
+                font-size: 0.85em;
+            }
+
+            section {
+                padding: 1.5rem 0.8rem; 
+                margin: 15px auto;
+            }
+            h2 {
+                font-size: 1.8em;
+                margin-bottom: 20px;
+            }
+
+            #sobre {
+                flex-direction: column; 
+                text-align: center; 
+                gap: 15px;
+            }
+            #sobre img {
+                margin-bottom: 15px;
+                order: unset; 
+                max-width: 250px; 
+            }
+            #sobre div {
+                order: unset; 
+                min-width: unset; 
+            }
+            #sobre h2, #sobre h3 {
+                text-align: center; 
+                border-bottom: 2px solid #fee2f7; 
+                padding-bottom: 8px;
+            }
+            #sobre h3 {
+                margin-top: 10px; 
+                margin-bottom: 6px;
+                font-size: 1.1em;
+            }
+            .btn-servicos-sobre {
+                padding: 10px 20px;
+                font-size: 0.9em;
+                margin-top: 15px;
+            }
+
+            .portfolio-item-row {
+                flex-direction: column; 
+                align-items: center; 
+                gap: 15px;
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            .portfolio-item-row img {
+                margin-bottom: 0; 
+                max-width: 150px; 
+            }
+            .portfolio-text-content {
+                width: 100%;
+                text-align: center; 
+            }
+            .portfolio-text-content h3 {
+                text-align: center; 
+                font-size: 1.2em;
+                margin-bottom: 8px;
+            }
+            .portfolio-text-content p {
+                font-size: 0.9em;
+            }
+
+            #servicos ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+            #servicos ul li {
+                width: 90%; 
+                max-width: 300px; 
+                min-width: unset; 
+                padding: 15px;
+            }
+            #servicos ul li strong {
+                font-size: 1.1em;
+            }
+            #servicos ul li .preco {
+                font-size: 1.05em;
+            }
+            .btn-contato {
+                margin: 0 8px 8px 0; 
+                font-size: 0.9em;
+                padding: 10px 18px;
+            }
+            footer {
+                padding: 1rem;
+            }
+            footer img {
+                max-width: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1 style="display: none;">Luana Martinez Studio</h1> 
+        <p style="display: none;">Realçando a beleza do seu olhar com carinho e expertise!</p>
+        
+        <nav>
+            <a href="#sobre">Sobre</a>
+            <a href="#portfolio">Portfólio</a>
+            <a href="#servicos">Serviços</a>
+            <a href="#contato">Agendamento</a>
+        </nav>
+    </header>
+
+    <section id="sobre">
+        <div>
+            <h2>🎀 Sobre Luana Martinez</h2>
+            <p>Sou a Luana Martinez, especialista em extensão de cílios, brow lamination, lash lift e design de sobrancelhas. Com anos de dedicação e aprimoramento, busco constantemente as melhores técnicas e produtos para garantir a você um olhar deslumbrante e natural.</p>
+
+            <h3>✨ Minha Paixão: Realçar Sua Beleza Única</h3>
+            <p>Acredito que a beleza deve ser realçada de forma personalizada. Por isso, meu atendimento é 100% focado em entender seus desejos e a particularidade do seu olhar, criando resultados que expressam sua individualidade com muito carinho e precisão. Minha missão é elevar sua autoestima e proporcionar momentos de cuidado e bem-estar.</p>
+
+            <a href="#servicos" class="btn-contato btn-servicos-sobre">Conheça meu trabalho </a>
+        </div>
+        <img src="Luana1.jpg" alt="Luana Martinez aplicando extensão de cílios" />
+    </section>
+
+    <section id="portfolio" class="portfolio">
+        <h2>✨ Portfólio</h2>
+        <p><strong><i>Veja Alguns dos meus trabalhos abaixo:</i></strong></p>
+
+        <div class="portfolio-item-row">
+            <img src="Fox1.jpg" alt="Cílios Efeito Fox Eyes" />
+            <div class="portfolio-text-content">
+                <h3><strong><em>Volume Fox</em></strong></h3>
+                <p>
+                    Este efeito alonga e eleva o olhar, criando um visual mais sensual e puxado, ideal para quem busca um estilo ousado e marcante.
+                </p>
+            </div>
+        </div>
+
+        <div class="portfolio-item-row">
+            <img src="Wispy1.jpg" alt="Cílios Efeito Whispy" />
+            <div class="portfolio-text-content">
+                <h3><strong><em>Volume Wispy</em></strong></h3>
+                <p>
+                    Conhecido por seu volume mais natural e textura leve, caracteriza-se por picos de fios maiores misturados com cílios menores, criando um visual arejado e delicado.
+                </p>
+            </div>
+        </div>
+
+        <div class="portfolio-item-row">
+            <img src="Egipcio1.jpg" alt="Cílios Efeito Egípcio" />
+            <div class="portfolio-text-content">
+                <h3><strong><em>Volume Egípcio</em></strong></h3>
+                <p>
+                    Um estilo sofisticado que combina volume e alongamento, com um mapeamento que realça o canto externo dos olhos e se estende sutilmente, conferindo um ar misterioso e elegante.
+                </p>
+            </div>
+        </div>
+
+    </section>
+
+    <section id="servicos">
+        <h2>💼 Serviços</h2>
+
+        <p class="observacao">
+            *TODAS AS EXTENSÕES SÃO ADAPTÁVEIS PARA CADA FORMATO DE OLHO*
+        </p>
+        <p class="observacao">
+            *A CLIENTE ESCOLHE COMO QUER O TAMANHO E O MODELO*
+        </p>
+
+        <ul>
+            <li>
+                <strong>Fio a fio</strong>
+                <p>Modelo leve e natural, realça o olhar sem pesar.</p>
+                <span class="preco">R$ 100,00</span>
+                <span class="manutencao">MANUTENÇÃO: R$ 65,00</span>
+            </li>
+            <li>
+                <strong>Volume Egípcio</strong>
+                <p>Volume mais preenchido, porém delicado, opções no fio preto e marrom.</p>
+                <span class="preco">R$ 110,00</span>
+                <span class="manutencao">MANUTENÇÃO: R$ 80,00</span>
+            </li>
+            <li>
+                <strong>Volume Wispy</strong>
+                <p>Volume híbrido, é delicado e abre o olhar.</p>
+                <span class="preco">R$ 120,00</span>
+                <span class="manutencao">MANUTENÇÃO: R$ 85,00</span>
+            </li>
+            <li>
+                <strong>Volume Kardashian</strong>
+                <p>Volume mais cheio que abre o olhar, pra quem gosta de cílios volumosos.</p>
+                <span class="preco">R$ 125,00</span>
+                <span class="manutencao">MANUTENÇÃO: R$ 90,00</span>
+            </li>
+            <li>
+                <strong>Lash Lift</strong>
+                <span class="preco">R$ 90,00</span>
+            </li>
+            <li>
+                <strong>Design de sobrancelhas</strong>
+                <span class="preco">R$ 40,00</span>
+            </li>
+        </ul>
+    </section>
+
+    <section id="contato">
+        <h2>📲 Agende seu horário</h2>
+        <p>Você pode agendar pelo WhatsApp ou Instagram:</p>
+        <a class="btn-contato btn-whats" href="https://wa.me/5515996250180" target="_blank">Chamar no WhatsApp</a>
+        <a class="btn-contato btn-insta" href="https://instagram.com/luamartinez_lash" target="_blank">Agendar pelo Instagram</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Luana Martinez | Todos os direitos reservados.</p>
+        <p>Produzido por:</p>
+        <img src="Assinatura.png" alt="Assinatura"/>
+    </footer>
+
+</body>
+</html>
